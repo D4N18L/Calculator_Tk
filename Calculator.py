@@ -6,13 +6,24 @@ root.title("Calculator")
 
 # place the user input into the text field
 i = 0
-
-
 def place_variables(num):
     global i
     display.insert(i, num)
     i+=1  # increments the index so when  a user clicks on another button , it does not replace the previous one
 
+def ClearAll():
+    display.delete(0,END)
+
+
+def ClearOne():
+    all_string=display.get()
+    if len(all_string):
+        new_string = all_string[:-1]
+        ClearAll()
+        display.insert(0,new_string)
+    else:
+        ClearAll()
+        display.insert(0,"Empty Textfield")
 
 # adding the input to the calculator
 display = Entry(root)
@@ -34,10 +45,10 @@ Button(root, text="6", command=lambda: place_variables(6)).grid(row=3, column=2)
 Button(root, text="9", command=lambda: place_variables(9)).grid(row=4, column=2)
 
 # Action Buttons
-Button(root, text="Clear All").grid(row=6, column=0)
+Button(root, text="Clear All", command= lambda: ClearAll()).grid(row=6, column=0)
 Button(root, text="0", command=lambda: place_variables(0)).grid(row=5, column=1)
 Button(root, text="Calculate").grid(row=6, column=2)
-Button(root, text="C").grid(row=6, column=1)
+Button(root, text="Clear One", command= lambda:ClearOne()).grid(row=6, column=1)
 
 # Operator Buttons
 Button(root, text="+").grid(row=2, column=3)
