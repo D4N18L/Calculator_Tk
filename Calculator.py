@@ -9,6 +9,7 @@ i = 0
 
 
 def place_variables(num):
+    # announce the global variable(i) in this function
     global i
     display.insert(i, num)
     # increments the index on the text field
@@ -16,22 +17,32 @@ def place_variables(num):
 
 
 def place_operators(operator):
+    # announce the global variable(i) in this function
     global i
+    # get the length of the operator as some are more than one index
     length = len(operator)
     display.insert(i, operator)
     i += length
 
 
 def Calculate():
-    all_string = display.get()
+    all_string = display.get()  # Selects the whole textfield
     try:
-        equals = parser.expr(all_string).compile()
-        result = eval(equals)
-        ClearAll()
-        display.insert(0, result)
-    except Exception:
-        display.insert(0, "Arithmetic Not Completed!")
+        equals = parser.expr(all_string).compile()  # compiles the content of the textfield
+        result = eval(equals)  # evaluate it
+        ClearAll()  # clears textfield
+        display.insert(0, result)  # insert the result
 
+    except Exception:
+        ClearAll()
+        display.insert(0, "Attempt Failed")
+
+
+# def factorial(num):
+# if num == 0:
+#   return 1
+# else:
+#  return num * factorial(num-1)
 
 def ClearAll():
     display.delete(0, END)
@@ -84,10 +95,10 @@ Button(root, text="pow", command=lambda: place_operators("**")).grid(row=4, colu
 
 Button(root, text="pi", command=lambda: place_operators("*3.14")).grid(row=2, column=5)
 Button(root, text="(", command=lambda: place_operators("(")).grid(row=3, column=5)
-Button(root, text="x!", command=lambda: place_operators("**")).grid(row=4, column=5)
+# Button(root, text="x!", command=lambda: place_operators("!")).grid(row=4, column=5)
+Button(root, text="^3", command=lambda: place_operators("**3")).grid(row=4, column=5)
 
 Button(root, text=")", command=lambda: place_operators(")")).grid(row=2, column=6)
 Button(root, text="^2", command=lambda: place_operators("**2")).grid(row=3, column=6)
-Button(root, text="^3", command=lambda: place_operators("**3")).grid(row=4, column=6)
 
 root.mainloop()
