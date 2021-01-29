@@ -1,2 +1,2 @@
 # Calculator_Tk
-A gui calculator application using  TKinter
+A gui application using  TKinter to perform simple operations
